@@ -17,7 +17,7 @@
 ;;--------------------------------------------------------------------------------
 ;; load-path
 ;;--------------------------------------------------------------------------------
-(let ((default-directory (expand-file-name "~/.emacs.d/elisp")))
+(let ((default-directory (expand-file-name (concat user-emacs-directory "elisp"))))
   (add-to-list 'load-path default-directory)
   (if (fboundp 'normal-top-level-add-subdirs-to-load-path)
       (normal-top-level-add-subdirs-to-load-path)))
@@ -45,16 +45,18 @@
 ;;--------------------------------------------------------------------------------
 ;; モードライン
 ;;--------------------------------------------------------------------------------
-(load "~/.emacs.d/conf/mode-line")
+(load (concat user-emacs-directory "conf/mode-line"))
 ;;--------------------------------------------------------------------------------
 
 ;;--------------------------------------------------------------------------------
 ;; color-theme
 ;;--------------------------------------------------------------------------------
-(load "~/.emacs.d/elisp/color-theme/themes/color-theme-library")
-(require 'color-theme)
-(color-theme-dark-laptop)
-(global-font-lock-mode t)
+(custom-set-variables
+ '(custom-safe-themes (quote ("f07583bdbcca020adecb151868c33820dfe3ad5076ca96f6d51b1da3f0db7105" default))))
+(add-to-list 'custom-theme-load-path (concat user-emacs-directory "elisp/replace-colorthemes"))
+(load-theme 'dark-laptop)
+(custom-set-faces
+ '(default ((t (:background "unspecified" :foreground "unspecified")))))
 ;;--------------------------------------------------------------------------------
 
 ;;--------------------------------------------------------------------------------
@@ -157,11 +159,11 @@
 ;; キーバインド
 ;;--------------------------------------------------------------------------------
 (keyboard-translate ?\C-h ?\C-?)
-(global-set-key "\C-cl" 'toggle-truncate-lines)
-(global-set-key "\C-cws" 'whitespace-mode)
-(global-set-key "\C-crs" 'replace-string)
-(global-set-key "\C-crr" 'replace-regexp)
-(global-set-key "\C-cfw" 'follow-delete-other-windows-and-split)
+(global-set-key (kbd "C-c l")   'toggle-truncate-lines)
+(global-set-key (kbd "C-c w s") 'whitespace-mode)
+(global-set-key (kbd "C-c r s") 'replace-string)
+(global-set-key (kbd "C-c r r") 'replace-regexp)
+(global-set-key (kbd "C-c f w") 'follow-delete-other-windows-and-split)
 (global-set-key [zenkaku-hankaku] 'toggle-input-method)
 ;;--------------------------------------------------------------------------------
 
@@ -170,8 +172,8 @@
 ;;--------------------------------------------------------------------------------
 (require 'tabbar)
 (tabbar-mode)
-(global-set-key "\M-]" 'tabbar-forward)  ; 次のタブ
-(global-set-key "\M-[" 'tabbar-backward) ; 前のタブ
+(global-set-key (kbd "M-]") 'tabbar-forward)  ; 次のタブ
+(global-set-key (kbd "M-[") 'tabbar-backward) ; 前のタブ
 ;; タブ上でマウスホイールを使わない
 (tabbar-mwheel-mode nil)
 ;; グループを使わない
@@ -209,7 +211,7 @@
   (let ((result (ignore-errors
     (direx-project:jump-to-project-root-other-window) t)))
     (unless result (direx:jump-to-directory-other-window))))
-(global-set-key "\C-cdx" 'direx:jump-to-project-directory)
+(global-set-key (kbd "C-c d x") 'direx:jump-to-project-directory)
 ;;--------------------------------------------------------------------------------
 
 ;;--------------------------------------------------------------------------------
@@ -220,7 +222,7 @@
 (setq ac-delay 0)          ; 補完までの時間
 (setq ac-auto-show-menu 0) ; メニューが表示されるまでの時間
 (setq ac-auto-start 1)     ; 補完が開始される文字数
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/elisp/auto-complete/dict")
+(add-to-list 'ac-dictionary-directories (concat user-emacs-directory "elisp/auto-complete/dict"))
 ;;--------------------------------------------------------------------------------
 
 ;;--------------------------------------------------------------------------------
@@ -245,7 +247,7 @@
 ;; jaunte
 ;;--------------------------------------------------------------------------------
 (autoload 'jaunte "jaunte")
-(global-set-key "\C-cj" 'jaunte)
+(global-set-key (kbd "C-c j") 'jaunte)
 (setq jaunte-hint-unit 'whitespace)
 ;;--------------------------------------------------------------------------------
 
@@ -253,7 +255,7 @@
 ;; popup-kill-ring
 ;;--------------------------------------------------------------------------------
 (autoload 'popup-kill-ring "popup-kill-ring")
-(global-set-key "\M-y" 'popup-kill-ring)
+(global-set-key (kbd "M-y") 'popup-kill-ring)
 (setq popup-kill-ring-popup-width 51)
 ;;--------------------------------------------------------------------------------
 
@@ -288,11 +290,11 @@
 (autoload 'magit-reflog         "magit")
 (autoload 'magit-branch-manager "magit")
 (autoload 'magit-browse         "magit")
-(global-set-key "\C-cms" 'magit-status)         ; git status
-(global-set-key "\C-cml" 'magit-log)            ; git log
-(global-set-key "\C-cmr" 'magit-reflog)         ; git reflog
-(global-set-key "\C-cmb" 'magit-branch-manager) ; git branch
-(global-set-key "\C-cmw" 'magit-browse)
+(global-set-key (kbd "C-c m s") 'magit-status)         ; git status
+(global-set-key (kbd "C-c m l") 'magit-log)            ; git log
+(global-set-key (kbd "C-c m r") 'magit-reflog)         ; git reflog
+(global-set-key (kbd "C-c m b") 'magit-branch-manager) ; git branch
+(global-set-key (kbd "C-c m w") 'magit-browse)
 (add-hook-fn 'magit-mode-hook
   ;; diff用のfaceを設定する
   (diff-mode-setup-faces)
@@ -305,7 +307,7 @@
 ;;--------------------------------------------------------------------------------
 ;; c-mode
 ;;--------------------------------------------------------------------------------
-(global-set-key "\C-cc" 'c-mode)
+(global-set-key (kbd "C-c c") 'c-mode)
 (add-hook-fn 'c-mode-common-hook
   (c-set-style "stroustrup")     ; インデントスタイル
   (c-toggle-auto-hungry-state t) ; DELで左側の空白を全削除
@@ -329,8 +331,8 @@
 (autoload 'inf-ruby-keys "inf-ruby")
 ;; (autoload 'inf-ruby-setup-keybindings "inf-ruby")
 (autoload 'ruby-electric-mode "ruby-electric")
-(global-set-key "\C-crb" 'ruby-mode)
-(add-auto-mode "\\.rb" ruby-mode)
+(global-set-key (kbd "C-c r b") 'ruby-mode)
+(add-auto-mode "\\.rb$" ruby-mode)
 (add-hook-fn 'ruby-mode-hook
   (add-to-list 'interpreter-mode-alist '("ruby" . ruby-mode))
   ;; (inf-ruby-setup-keybindings)
@@ -361,7 +363,7 @@
 ;; rhtml-mode
 ;;--------------------------------------------------------------------------------
 (autoload 'rhtml-mode "rhtml-mode")
-(add-auto-mode "\\.erb" rhtml-mode)
+(add-auto-mode "\\.erb$" rhtml-mode)
 (add-hook-fn 'rhtml-mode-hook
   (set-face-background 'erb-face nil)
   (set-face-underline-p 'erb-face t)
@@ -382,7 +384,7 @@
 ;; slim-mode
 ;;--------------------------------------------------------------------------------
 (autoload 'slim-mode "slim-mode")
-(add-auto-mode "\\.slim" slim-mode)
+(add-auto-mode "\\.slim$" slim-mode)
 ;;--------------------------------------------------------------------------------
 
 ;;--------------------------------------------------------------------------------
@@ -396,7 +398,7 @@
 ;; less-css-mode
 ;;--------------------------------------------------------------------------------
 (autoload 'less-css-mode "less-css-mode")
-(add-auto-mode "\\.less" less-css-mode)
+(add-auto-mode "\\.less$" less-css-mode)
 (setq c-basic-offset 2)
 ;;--------------------------------------------------------------------------------
 
@@ -404,14 +406,14 @@
 ;; markdown-mode
 ;;--------------------------------------------------------------------------------
 (autoload 'markdown-mode "markdown-mode")
-(add-auto-mode "\\.md" markdown-mode)
+(add-auto-mode "\\.md$" markdown-mode)
 ;;--------------------------------------------------------------------------------
 
 ;;--------------------------------------------------------------------------------
 ;; coffee-mode
 ;;--------------------------------------------------------------------------------
 (autoload 'coffee-mode "coffee-mode")
-(add-auto-mode "\\.coffee" coffee-mode)
+(add-auto-mode "\\.coffee$" coffee-mode)
 (add-hook-fn 'coffee-mode-hook
   (setq coffee-tab-width 2)
   (define-key coffee-mode-map "\C-m" 'coffee-newline-and-indent))
