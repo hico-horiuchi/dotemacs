@@ -376,6 +376,7 @@
 ;;--------------------------------------------------------------------------------
 (autoload 'yaml-mode "yaml-mode")
 (add-auto-mode "\\.yml$" yaml-mode)
+(add-auto-mode "\\.yml.sample$" yaml-mode)
 (add-hook-fn 'yaml-mode-hook
   (define-key yaml-mode-map "\C-m" 'newline-and-indent))
 ;;--------------------------------------------------------------------------------
