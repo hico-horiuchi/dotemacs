@@ -187,11 +187,12 @@
 ;; org-mode
 ;;--------------------------------------------------------------------------------
 (autoload 'org-install "org-install")
+(autoload 'org-bullets-mode "org-bullets")
 (global-set-key (kbd "C-c o r") 'org-mode)
 (global-set-key (kbd "C-c o a") 'org-agenda)
-(global-set-key (kbd "C-c o i") 'org-toggle-inline-images)
 (add-auto-mode "\\.org$" org-mode)
 (add-hook-fn 'org-mode-hook
+  (global-set-key (kbd "C-c o i") 'org-toggle-inline-images)
   ;; 日本語リンクのfont-lock対策
   (setq org-activate-links '(date bracket radio tag date footnote angle)
         org-return-follows-link t                  ; RETでカーソル下のリンクを開く
@@ -211,6 +212,15 @@
   (load (concat user-emacs-directory "conf/ox-latex"))
   ;; SRCブロックをハイライト表示
   (setq org-src-fontify-natively t))
+;;--------------------------------------------------------------------------------
+
+;;--------------------------------------------------------------------------------
+;; org-bullets
+;;--------------------------------------------------------------------------------
+(global-set-key (kbd "C-c o b") 'org-bullets-mode)
+(add-hook-fn 'org-bullets-mode-hook
+  (global-set-key (kbd "C-c o b e") 'org-bullets-export)
+  (global-set-key (kbd "C-c o b i") 'org-bullets-import))
 ;;--------------------------------------------------------------------------------
 
 ;;--------------------------------------------------------------------------------
