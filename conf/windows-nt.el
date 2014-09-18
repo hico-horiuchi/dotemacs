@@ -14,5 +14,5 @@
 ;;--------------------------------------------------------------------------------
 (defvar japanese-font "Ricty Regular for Powerline")
 (defvar tabbar-font "Ricty Regular for Powerline")
-(set-default-font "Ricty Regular for Powerline-9")
+(set-default-font "Ricty Regular for Powerline-12")
 ;;--------------------------------------------------------------------------------
