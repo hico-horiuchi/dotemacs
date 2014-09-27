@@ -350,7 +350,9 @@
   ;; 括弧の自動挿入
   (ruby-electric-mode)
   ;; 改行時に自動インデント
-  (define-key ruby-mode-map "\C-m" 'ruby-reindent-then-newline-and-indent))
+  (define-key ruby-mode-map "\C-m" 'ruby-reindent-then-newline-and-indent)
+  ;; magic commentを入れない
+  (ruby-insert-encoding-magic-comment nil))
 ;; インデント幅: 2
 (add-hook-fn 'ruby-mode-hook (setq ruby-indent-level 2))
 (setq ruby-deep-indent-paren-style nil)
