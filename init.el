@@ -217,7 +217,7 @@
 ;;--------------------------------------------------------------------------------
 ;; org-bullets
 ;;--------------------------------------------------------------------------------
-(global-set-key (kbd "C-c o b") 'org-bullets-mode)
+(global-set-key (kbd "C-c o b m") 'org-bullets-mode)
 (add-hook-fn 'org-bullets-mode-hook
   (global-set-key (kbd "C-c o b e") 'org-bullets-export)
   (global-set-key (kbd "C-c o b i") 'org-bullets-import))

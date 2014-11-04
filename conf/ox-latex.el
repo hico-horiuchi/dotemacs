@@ -1,6 +1,7 @@
 ;; -*- Mode: Emacs-Lisp ; Coding: utf-8 -*-
 
 (require 'ox-latex)
+
 ;; report
 (add-to-list 'org-latex-classes '(
   "report"
@@ -19,6 +20,7 @@
   ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
   ("\\paragraph{%s}" . "\\paragraph*{%s}")
   ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
 ;; resume
 (add-to-list 'org-latex-classes '(
   "resume"
@@ -29,14 +31,13 @@
    \\usepackage{pxjahyper}
    \\usepackage{enumerate}
    \\hypersetup{pdfborder={0,0,0}}
-   \\pagestyle{empty}
-   \\thispagestyle{empty}
    [NO-DEFAULT-PACKAGES]"
   ("\\section{%s}" . "\\section*{%s}")
   ("\\subsection{%s}" . "\\subsection*{%s}")
   ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
   ("\\paragraph{%s}" . "\\paragraph*{%s}")
   ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
 ;; thesis
 (add-to-list 'org-latex-classes '(
   "thesis"
@@ -56,11 +57,13 @@
   ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
   ("\\paragraph{%s}" . "\\paragraph*{%s}")
   ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
 ;; beamer
 (add-to-list 'org-latex-classes '(
   "beamer"
   "\\documentclass[dvipdfm]{beamer}
    [NO-DEFAULT-PACKAGES]"
   org-beamer-sectioning))
+
 ;; デフォルトの #+LATEX_CLASS
 (setq org-latex-default-class "report")
