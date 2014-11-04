@@ -2,6 +2,13 @@
 
 (require 'ox-latex)
 
+(defun my-latex-filter-backslash (text backend info)
+  "Replace $\backslash$ to \\ in LaTeX export."
+  (when (org-export-derived-backend-p backend 'latex)
+    (replace-regexp-in-string "\\\$\\\\backslash\\\$" "\\\\\\\\" text)))
+(add-to-list 'org-export-filter-final-output-functions
+             'my-latex-filter-backslash)
+
 ;; report
 (add-to-list 'org-latex-classes '(
   "report"
