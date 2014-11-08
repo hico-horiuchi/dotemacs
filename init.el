@@ -32,6 +32,7 @@
  '(auto-save-list-file-prefix nil) ; 自動保存ファイルリストを初期化しない
  '(delete-auto-save-files t)       ; 自動保存ファイルを削除
  '(inhibit-startup-screen t)       ; スタートアップ画面を非表示
+ '(initial-scratch-message nil)    ; scratchメッセージを非表示
  '(make-backup-files nil)          ; バックアップファイルを作成しない
  '(scroll-bar-mode nil)            ; スクロールバーなし
  '(transient-mark-mode t)          ; アクティブなリージョンをハイライト
