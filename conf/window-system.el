@@ -63,3 +63,12 @@
 ;; フォント
 (set-face-attribute 'tabbar-default nil :family tabbar-font :height 1.0)
 ;;--------------------------------------------------------------------------------
+
+;;--------------------------------------------------------------------------------
+;; mark
+;;--------------------------------------------------------------------------------
+(defun th-activate-mark-init () (setq cursor-type 'bar))
+(defun th-deactivate-mark-init () (setq cursor-type 'box))
+(add-hook 'activate-mark-hook 'th-activate-mark-init)
+(add-hook 'deactivate-mark-hook 'th-deactivate-mark-init)
+;;--------------------------------------------------------------------------------
