@@ -8,6 +8,18 @@
     (replace-regexp-in-string "\\\$\\\\backslash\\\$" "\\\\\\\\" text)))
 (add-to-list 'org-export-filter-final-output-functions
              'my-latex-filter-backslash)
+(defun my-latex-filter-doller (text backend info)
+  "Replace \$ to $ in LaTeX export."
+  (when (org-export-derived-backend-p backend 'latex)
+    (replace-regexp-in-string "\\\$" "\$" text)))
+(add-to-list 'org-export-filter-final-output-functions
+             'my-latex-filter-doller)
+(defun my-latex-filter-figure (text backend info)
+  "Replace .9 to 1 in LaTeX export."
+  (when (org-export-derived-backend-p backend 'latex)
+    (replace-regexp-in-string "\\\.9" "" text)))
+(add-to-list 'org-export-filter-final-output-functions
+             'my-latex-filter-figure)
 
 ;; report
 (add-to-list 'org-latex-classes '(
