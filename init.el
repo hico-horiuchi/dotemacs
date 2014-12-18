@@ -56,17 +56,6 @@
 ;;--------------------------------------------------------------------------------
 ;; hl-line-mode
 ;;--------------------------------------------------------------------------------
-(defface hlline-face
-  '((((class color)
-      (background dark))
-     (:background "black"))
-    (((class color)
-      (background light))
-     (:background "black"))
-    (t
-     ()))
-  "*Face used by hl-line.")
-(setq hl-line-face 'hlline-face)
 (global-hl-line-mode)
 ;;--------------------------------------------------------------------------------
 
@@ -306,8 +295,7 @@
 ;;--------------------------------------------------------------------------------
 (when (eq system-type 'windows-nt)
   (if (window-system)
-      (load (concat user-emacs-directory "conf/windows-gui"))
-    (load (concat user-emacs-directory "conf/windows-cui"))))
+      (load (concat user-emacs-directory "conf/windows-gui"))))
 (when (eq system-type 'darwin)
   (if (window-system)
       (load (concat user-emacs-directory "conf/darwin-gui"))

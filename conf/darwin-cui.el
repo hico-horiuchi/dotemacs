@@ -17,3 +17,19 @@
 (setq linum-format "%3d ")
 (set-face-attribute 'linum nil :background "black" :foreground "unspecified")
 ;;--------------------------------------------------------------------------------
+
+;;--------------------------------------------------------------------------------
+;; hl-line-mode
+;;--------------------------------------------------------------------------------
+(defface hlline-face
+  '((((class color)
+      (background dark))
+     (:background "black"))
+    (((class color)
+      (background light))
+     (:background "black"))
+    (t
+     ()))
+  "*Face used by hl-line.")
+(setq hl-line-face 'hlline-face)
+;;--------------------------------------------------------------------------------
