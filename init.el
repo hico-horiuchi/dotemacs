@@ -198,7 +198,7 @@
 (global-set-key (kbd "C-c o r") 'org-mode)
 (global-set-key (kbd "C-c o a") 'org-agenda)
 (add-auto-mode "\\.org$" org-mode)
-(add-hook-fn 'org-mode-hoko
+(add-hook-fn 'org-mode-hook
   (global-set-key (kbd "C-c o i") 'org-toggle-inline-images)
   ;; 日本語リンクのfont-lock対策
   (setq org-activate-links '(date bracket radio tag date footnote angle)
