@@ -4,7 +4,7 @@
 ;; テーマ
 ;;--------------------------------------------------------------------------------
 (custom-set-variables
- '(custom-safe-themes (quote ("7392f213ece957a89580293fb7976359b33d5afd17709a3add22e098c19552a9" default))))
+ '(custom-safe-themes (quote ("fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" default))))
 (add-to-list 'custom-theme-load-path (concat user-emacs-directory "theme/solarized"))
 (load-theme 'solarized-dark)
 ;;--------------------------------------------------------------------------------
@@ -16,12 +16,6 @@
 ;;--------------------------------------------------------------------------------
 
 ;;--------------------------------------------------------------------------------
-;; hl-line-mode
-;;--------------------------------------------------------------------------------
-(global-hl-line-mode)
-;;--------------------------------------------------------------------------------
-
-;;--------------------------------------------------------------------------------
 ;; 対応する括弧をハイライト
 ;;--------------------------------------------------------------------------------
 (setq show-paren-style 'expression)                     ; 括弧内もハイライト
@@ -30,27 +24,12 @@
 ;;--------------------------------------------------------------------------------
 
 ;;--------------------------------------------------------------------------------
-;; フォント
+;; mark
 ;;--------------------------------------------------------------------------------
-(defvar japanese-font "Ricty Regular for Powerline")
-(defvar tabbar-font "Ricty Regular for Powerline")
-(set-default-font "Ricty Regular for Powerline-15")
-(set-fontset-font nil 'jisx0201                 japanese-font)
-(set-fontset-font nil 'latin-jisx0201           japanese-font)
-(set-fontset-font nil 'japanese-jisx0208        japanese-font)
-(set-fontset-font nil 'japanese-jisx0208-1978   japanese-font)
-(set-fontset-font nil 'japanese-jisx0212        japanese-font)
-(set-fontset-font nil 'japanese-jisx0213-1      japanese-font)
-(set-fontset-font nil 'japanese-jisx0213-2      japanese-font)
-(set-fontset-font nil 'japanese-jisx0213-a      japanese-font)
-(set-fontset-font nil 'japanese-jisx0213.2004-1 japanese-font)
-(set-fontset-font nil 'katakana-sjis            japanese-font)
-(set-fontset-font nil 'cp932-2-byte             japanese-font)
-(set-fontset-font nil 'cp932                    japanese-font)
-(set-fontset-font nil '(#x3040 . #x309f)        japanese-font)
-(set-fontset-font nil '(#x30a0 . #x30ff)        japanese-font)
-(set-fontset-font nil '(#xff00 . #xffef)        japanese-font)
-(set-fontset-font nil '(#x0370 . #x03ff)        japanese-font)
+(defun th-activate-mark-init () (setq cursor-type 'bar))
+(defun th-deactivate-mark-init () (setq cursor-type 'box))
+(add-hook 'activate-mark-hook 'th-activate-mark-init)
+(add-hook 'deactivate-mark-hook 'th-deactivate-mark-init)
 ;;--------------------------------------------------------------------------------
 
 ;;--------------------------------------------------------------------------------
@@ -64,14 +43,29 @@
 (set-face-attribute 'tabbar-unselected nil ; 非アクティブなタブ
   :background "#829496" :foreground "#002b36" :box nil)
 ;; フォント
+(defvar tabbar-font "Ricty Regular for Powerline")
 (set-face-attribute 'tabbar-default nil :family tabbar-font :height 1.0)
 ;;--------------------------------------------------------------------------------
 
 ;;--------------------------------------------------------------------------------
-;; mark
+;; ダイアログ
 ;;--------------------------------------------------------------------------------
-(defun th-activate-mark-init () (setq cursor-type 'bar))
-(defun th-deactivate-mark-init () (setq cursor-type 'box))
-(add-hook 'activate-mark-hook 'th-activate-mark-init)
-(add-hook 'deactivate-mark-hook 'th-deactivate-mark-init)
+(setq use-dialog-box nil)
+;;--------------------------------------------------------------------------------
+
+;;--------------------------------------------------------------------------------
+;; フォント
+;;--------------------------------------------------------------------------------
+(let* ((size 15)
+       (asciifont "Ricty")
+       (jpfont "Ricty")
+       (h (* size 10))
+       (fontspec (font-spec :family asciifont))
+       (jp-fontspec (font-spec :family jpfont)))
+  (set-face-attribute 'default nil :family asciifont :height h)
+  (set-fontset-font nil 'japanese-jisx0213.2004-1 jp-fontspec)
+  (set-fontset-font nil 'japanese-jisx0213-2 jp-fontspec)
+  (set-fontset-font nil 'katakana-jisx0201 jp-fontspec)
+  (set-fontset-font nil '(#x0080 . #x024F) fontspec)
+  (set-fontset-font nil '(#x0370 . #x03FF) fontspec))
 ;;--------------------------------------------------------------------------------

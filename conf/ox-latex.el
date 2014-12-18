@@ -44,7 +44,7 @@
 (add-to-list 'org-latex-classes '(
   "resume"
   "\\documentclass[9pt, a4j, twocolumn]{jsarticle}
-   \\usepackage[top=15truemm,bottom=20truemm,left=15truemm,right=15truemm]{geometry}
+   \\usepackage[top=30truemm,bottom=25truemm,left=20truemm,right=20truemm]{geometry}
    \\usepackage[dvipdfm]{hyperref}
    \\usepackage[dvipdfm]{graphicx}
    \\usepackage{pxjahyper}
