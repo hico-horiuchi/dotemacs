@@ -71,12 +71,12 @@
 ;;--------------------------------------------------------------------------------
 ;; git-gutter
 ;;--------------------------------------------------------------------------------
-(require 'git-gutter)
-(global-git-gutter-mode)
-(git-gutter:linum-setup)
-(global-set-key (kbd "C-c g h") 'git-gutter:popup-hunk)
-(global-set-key (kbd "C-c g p") 'git-gutter:previous-hunk)
-(global-set-key (kbd "C-c g n") 'git-gutter:next-hunk)
+;; (require 'git-gutter)
+;; (global-git-gutter-mode)
+;; (git-gutter:linum-setup)
+;; (global-set-key (kbd "C-c g h") 'git-gutter:popup-hunk)
+;; (global-set-key (kbd "C-c g p") 'git-gutter:previous-hunk)
+;; (global-set-key (kbd "C-c g n") 'git-gutter:next-hunk)
 ;;--------------------------------------------------------------------------------
 
 ;;--------------------------------------------------------------------------------
