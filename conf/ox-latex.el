@@ -26,8 +26,8 @@
   "report"
   "\\documentclass[9pt, a4j]{jsarticle}
    \\usepackage[top=20truemm,bottom=20truemm,left=20truemm,right=20truemm]{geometry}
-   \\usepackage[dvipdfm]{hyperref}
-   \\usepackage[dvipdfm]{graphicx}
+   \\usepackage[dvipdfmx]{hyperref}
+   \\usepackage[dvipdfmx]{graphicx}
    \\usepackage{pxjahyper}
    \\usepackage{ascmac,here,txfonts}
    \\usepackage{listings,jlisting}
@@ -45,8 +45,8 @@
   "resume"
   "\\documentclass[9pt, a4j, twocolumn]{jsarticle}
    \\usepackage[top=30truemm,bottom=25truemm,left=20truemm,right=20truemm]{geometry}
-   \\usepackage[dvipdfm]{hyperref}
-   \\usepackage[dvipdfm]{graphicx}
+   \\usepackage[dvipdfmx]{hyperref}
+   \\usepackage[dvipdfmx]{graphicx}
    \\usepackage{pxjahyper}
    \\usepackage{enumerate}
    \\hypersetup{pdfborder={0,0,0}}
@@ -80,7 +80,7 @@
 ;; beamer
 (add-to-list 'org-latex-classes '(
   "beamer"
-  "\\documentclass[dvipdfm]{beamer}
+  "\\documentclass[dvipdfmx]{beamer}
    [NO-DEFAULT-PACKAGES]"
   org-beamer-sectioning))
 
