@@ -32,6 +32,9 @@
 ;;--------------------------------------------------------------------------------
 ;; フォント
 ;;--------------------------------------------------------------------------------
+(defvar japanese-font "Ricty Regular for Powerline")
+(defvar tabbar-font "Ricty Regular for Powerline")
+(set-default-font "Ricty Regular for Powerline-15")
 (set-fontset-font nil 'jisx0201                 japanese-font)
 (set-fontset-font nil 'latin-jisx0201           japanese-font)
 (set-fontset-font nil 'japanese-jisx0208        japanese-font)
