@@ -358,6 +358,8 @@
 (autoload 'ruby-electric-mode "ruby-electric")
 (global-set-key (kbd "C-c r b") 'ruby-mode)
 (add-auto-mode "\\.rb$" ruby-mode)
+(add-auto-mode "\\.rake$" ruby-mode)
+(add-auto-mode "Gemfile$" ruby-mode)
 (add-hook-fn 'ruby-mode-hook
   (add-to-list 'interpreter-mode-alist '("ruby" . ruby-mode))
   ;; (inf-ruby-setup-keybindings)
