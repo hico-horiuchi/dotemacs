@@ -288,6 +288,16 @@
 ;;--------------------------------------------------------------------------------
 (setq css-indent-offset 2)
 (setq cssm-indent-function #'cssm-c-style-indenter)
+(defvar hexcolor-keywords
+  '(("#[ABCDEFabcdef0-9]\\{3,6\\}"
+     (0 (put-text-property
+         (match-beginning 0)
+         (match-end 0)
+         'face (list :background
+                     (match-string-no-properties 0)))))))
+(defun hexcolor-add-to-font-lock ()
+  (font-lock-add-keywords nil hexcolor-keywords))
+(add-hook 'css-mode-hook 'hexcolor-add-to-font-lock)
 ;;--------------------------------------------------------------------------------
 
 ;;--------------------------------------------------------------------------------
