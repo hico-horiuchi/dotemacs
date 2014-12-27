@@ -428,6 +428,17 @@
 (autoload 'less-css-mode "less-css-mode")
 (add-auto-mode "\\.less$" less-css-mode)
 (setq c-basic-offset 2)
+(defvar hexcolor-keywords
+  '(("#[ABCDEFabcdef0-9]\\{3,6\\}"
+     (0 (put-text-property
+         (match-beginning 0)
+         (match-end 0)
+         'face (list :background
+                     (match-string-no-properties 0)))))))
+(defun hexcolor-add-to-font-lock ()
+  (font-lock-add-keywords nil hexcolor-keywords))
+(add-hook 'css-mode-hook 'hexcolor-add-to-font-lock)
+(add-hook 'less-css-mode-hook 'hexcolor-add-to-font-lock)
 ;;--------------------------------------------------------------------------------
 
 ;;--------------------------------------------------------------------------------
