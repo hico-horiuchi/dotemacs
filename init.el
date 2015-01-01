@@ -276,11 +276,17 @@
 ;;--------------------------------------------------------------------------------
 ;; go-mode
 ;;--------------------------------------------------------------------------------
-(require 'go-mode-load)
+(autoload 'go-mode "go-mode")
+(autoload 'gofmt-before-save "go-mode")
+(autoload 'godoc "go-mode")
+(autoload 'go-download-play "go-mode")
 (global-set-key (kbd "C-c g o") 'go-mode)
+(add-auto-mode "\\.go$" go-mode)
 (add-hook-fn 'go-mode-hook
-  (let ((envs '("GOROOT" "GOPATH"))) (exec-path-from-shell-copy-envs envs))
-  (add-hook 'before-save-hook 'gofmt-before-save))
+  (setq tab-width 2)
+  (setq indent-tabs-mode nil)
+  (add-hook 'before-save-hook 'gofmt-before-save)
+  (let ((envs '("GOROOT" "GOPATH"))) (exec-path-from-shell-copy-envs envs)))
 ;;--------------------------------------------------------------------------------
 
 ;;--------------------------------------------------------------------------------
