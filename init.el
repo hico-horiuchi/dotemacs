@@ -294,6 +294,8 @@
 ;;--------------------------------------------------------------------------------
 (autoload 'markdown-mode "markdown-mode")
 (add-auto-mode "\\.md$" markdown-mode)
+(add-hook-fn 'markdown-mode-hook
+  (remove-hook 'before-save-hook 'delete-trailing-whitespace))
 ;;--------------------------------------------------------------------------------
 
 ;;--------------------------------------------------------------------------------
