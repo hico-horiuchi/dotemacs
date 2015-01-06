@@ -284,7 +284,7 @@
 (add-auto-mode "\\.go$" go-mode)
 (add-hook-fn 'go-mode-hook
   (setq tab-width 2)
-  (setq indent-tabs-mode nil)
+  (setq indent-tabs-mode t)
   (add-hook 'before-save-hook 'gofmt-before-save)
   (let ((envs '("GOROOT" "GOPATH"))) (exec-path-from-shell-copy-envs envs)))
 ;;--------------------------------------------------------------------------------
