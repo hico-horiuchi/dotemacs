@@ -64,13 +64,33 @@
    \\卒論
    \\usepackage{epsbox}
    \\usepackage{makeidx}
-   \\usepackage[dvips]{graphicx}
+   \\usepackage[dvipdfmx]{graphicx}
    \\usepackage[dvipdfmx]{hyperref}
    \\usepackage{pxjahyper}
    \\usepackage{enumerate}
    \\hypersetup{pdfborder={0,0,0}}
    [NO-DEFAULT-PACKAGES]"
   ("\\chapter{%s}" . "\\chapter*{%s}")
+  ("\\section{%s}" . "\\section*{%s}")
+  ("\\subsection{%s}" . "\\subsection*{%s}")
+  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+  ("\\paragraph{%s}" . "\\paragraph*{%s}")
+  ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
+;; ieee
+(add-to-list 'org-latex-classes '(
+  "ieee"
+  "\\documentclass[conference]{IEEEtran}
+   \\usepackage[caption=false,font=footnotesize]{subfig}
+   \\usepackage[dvipdfmx]{graphicx}
+   \\usepackage[dvipdfmx]{hyperref}
+   \\usepackage{cite}
+   \\usepackage{array}
+   \\usepackage{fixltx2e}
+   \\usepackage{url}
+   \\usepackage{enumerate}
+   \\hypersetup{pdfborder={0,0,0}}
+   [NO-DEFAULT-PACKAGES]"
   ("\\section{%s}" . "\\section*{%s}")
   ("\\subsection{%s}" . "\\subsection*{%s}")
   ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
