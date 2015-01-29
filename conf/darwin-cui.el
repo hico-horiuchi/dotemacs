@@ -1,7 +1,20 @@
 ;; -*- Mode: Emacs-Lisp ; Coding: utf-8 -*-
 
 ;;--------------------------------------------------------------------------------
-;; color-theme
+;; Dictionary.app
+;;--------------------------------------------------------------------------------
+(global-set-key (kbd "C-c w o")
+ (lambda () (interactive)
+   (let ((url (concat "dict://" (read-from-minibuffer "" (current-word)))))
+     (browse-url url))))
+(global-set-key (kbd "C-c w s")
+ (lambda (key) (interactive "MSearch: ")
+   (let ((url (concat "dict://" key)))
+     (browse-url url))))
+;;--------------------------------------------------------------------------------
+
+;;--------------------------------------------------------------------------------
+;; テーマ
 ;;--------------------------------------------------------------------------------
 (custom-set-variables
  '(custom-safe-themes (quote ("f07583bdbcca020adecb151868c33820dfe3ad5076ca96f6d51b1da3f0db7105" default))))
