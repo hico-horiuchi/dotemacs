@@ -211,6 +211,7 @@
   (setq org-activate-links '(date bracket radio tag date footnote angle)
         org-return-follows-link t                  ; RETでカーソル下のリンクを開く
         org-startup-truncated nil                  ; 右端で折り返す
+        org-src-fontify-natively t                 ; SRCブロックをハイライト表示
         org-log-done 'time                         ; DONE時にタイムスタンプ
         org-use-fast-todo-selection t              ; TODO項目の入力補助
         org-export-latex-coding-system 'euc-jp-dos ; TeX形式をEUC-JPでエクスポート
@@ -223,9 +224,7 @@
   (setq org-directory (concat user-emacs-directory "org")
         org-agenda-files (list org-directory))
   ;; LaTeXエクスポートの設定
-  (load (concat user-emacs-directory "conf/ox-latex"))
-  ;; SRCブロックをハイライト表示
-  (setq org-src-fontify-natively t))
+  (load (concat user-emacs-directory "conf/ox-latex")))
 ;;--------------------------------------------------------------------------------
 
 ;;--------------------------------------------------------------------------------
