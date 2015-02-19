@@ -88,3 +88,67 @@
   (set-fontset-font nil '(#x0080 . #x024F) fontspec)
   (set-fontset-font nil '(#x0370 . #x03FF) fontspec))
 ;;--------------------------------------------------------------------------------
+
+;;--------------------------------------------------------------------------------
+;; auto-complete
+;;--------------------------------------------------------------------------------
+(require 'auto-complete-config)
+(ac-config-default)
+(setq ac-delay 0)          ; 補完までの時間
+(setq ac-auto-show-menu 0) ; メニューが表示されるまでの時間
+(setq ac-auto-start 1)     ; 補完が開始される文字数
+(add-to-list 'ac-dictionary-directories (concat user-emacs-directory "elisp/auto-complete/dict"))
+;;--------------------------------------------------------------------------------
+
+;;--------------------------------------------------------------------------------
+;; undohist
+;;--------------------------------------------------------------------------------
+(require 'undohist)
+(undohist-initialize)
+;;--------------------------------------------------------------------------------
+
+;;--------------------------------------------------------------------------------
+;; redo+
+;;--------------------------------------------------------------------------------
+(require 'redo+)
+(global-set-key (kbd "C-M-/") 'redo)
+(setq undo-no-redo t) ; 過去のUndoがRedoされないようにする
+;; 大量のUndoに耐えられるようにする
+(setq undo-limit 600000
+      undo-strong-limit 900000)
+;;--------------------------------------------------------------------------------
+
+;;--------------------------------------------------------------------------------
+;; jaunte
+;;--------------------------------------------------------------------------------
+(autoload 'jaunte "jaunte")
+(global-set-key (kbd "C-c j") 'jaunte)
+(setq jaunte-hint-unit 'whitespace)
+;;--------------------------------------------------------------------------------
+
+;;--------------------------------------------------------------------------------
+;; popup-kill-ring
+;;--------------------------------------------------------------------------------
+(autoload 'popup-kill-ring "popup-kill-ring")
+(global-set-key (kbd "M-y") 'popup-kill-ring)
+(setq popup-kill-ring-popup-width 51)
+;;--------------------------------------------------------------------------------
+
+;;--------------------------------------------------------------------------------
+;; go-mode
+;;--------------------------------------------------------------------------------
+(autoload 'go-mode "go-mode")
+(autoload 'gofmt-before-save "go-mode")
+(autoload 'godoc "go-mode")
+(autoload 'go-download-play "go-mode")
+(global-set-key (kbd "C-c g o") 'go-mode)
+(add-auto-mode "\\.go$" go-mode)
+(add-hook-fn 'go-mode-hook
+  (setq tab-width 2)
+  (setq indent-tabs-mode t)
+  (add-hook 'before-save-hook 'gofmt-before-save)
+  (let ((envs '("GOROOT" "GOPATH"))) (exec-path-from-shell-copy-envs envs)))
+;; gocode
+(add-to-list 'load-path "~/.go/src/github.com/nsf/gocode/emacs")
+(require 'go-autocomplete)
+;;--------------------------------------------------------------------------------
