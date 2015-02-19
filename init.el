@@ -362,6 +362,9 @@
   (setq indent-tabs-mode t)
   (add-hook 'before-save-hook 'gofmt-before-save)
   (let ((envs '("GOROOT" "GOPATH"))) (exec-path-from-shell-copy-envs envs)))
+;; gocode
+(add-to-list 'load-path "~/.go/src/github.com/nsf/gocode/emacs")
+(require 'go-autocomplete)
 ;;--------------------------------------------------------------------------------
 
 ;;--------------------------------------------------------------------------------
