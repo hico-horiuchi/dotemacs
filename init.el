@@ -154,19 +154,6 @@
 ;;--------------------------------------------------------------------------------
 
 ;;--------------------------------------------------------------------------------
-;; シェバンを含む場合は保存時に実行権限を付与
-;;--------------------------------------------------------------------------------
-(add-hook 'after-save-hook 'my-chmod-script)
-(defun my-chmod-script() (interactive) (save-restriction (widen)
-  (let ((name (buffer-file-name)))
-    (if (and (not (string-match ":" name))
-             (not (string-match "/\\.[^/]+$" name))
-             (equal "#!" (buffer-substring 1 (min 3 (point-max)))))
-        (progn (set-file-modes name (logior (file-modes name) 73))
-               (message "Wrote %s (chmod +x)" name))))))
-;;--------------------------------------------------------------------------------
-
-;;--------------------------------------------------------------------------------
 ;; ウィンドウ移動
 ;;--------------------------------------------------------------------------------
 (windmove-default-keybindings) ; Shift+カーソルキーで移動
@@ -218,25 +205,6 @@
   :background "white" :foreground "black" :box nil)
 ;; タブの間
 (setq tabbar-separator '(1.0))
-;;--------------------------------------------------------------------------------
-
-;;--------------------------------------------------------------------------------
-;; direx
-;;--------------------------------------------------------------------------------
-(require 'popwin)
-(setq display-buffer-function 'popwin:display-buffer)
-(require 'direx-project)
-(setq direx:leaf-icon   "  "
-      direx:open-icon   "- "
-      direx:closed-icon "+ ")
-(push '(direx:direx-mode :position left :width 30 :dedicated t)
-  popwin:special-display-config)
-(defun direx:jump-to-project-directory ()
-  (interactive)
-  (let ((result (ignore-errors
-    (direx-project:jump-to-project-root-other-window) t)))
-    (unless result (direx:jump-to-directory-other-window))))
-(global-set-key (kbd "C-c d x") 'direx:jump-to-project-directory)
 ;;--------------------------------------------------------------------------------
 
 ;;--------------------------------------------------------------------------------
