@@ -354,6 +354,7 @@
 (add-auto-mode "\\.rb$" ruby-mode)
 (add-auto-mode "\\.rake$" ruby-mode)
 (add-auto-mode "Gemfile$" ruby-mode)
+(add-auto-mode "Gomfile$" ruby-mode)
 (add-hook-fn 'ruby-mode-hook
   (add-to-list 'interpreter-mode-alist '("ruby" . ruby-mode))
   ;; (inf-ruby-setup-keybindings)
@@ -409,6 +410,7 @@
 ;;--------------------------------------------------------------------------------
 (autoload 'slim-mode "slim-mode")
 (add-auto-mode "\\.slim$" slim-mode)
+(add-auto-mode "\\.ace$" slim-mode)
 ;;--------------------------------------------------------------------------------
 
 ;;--------------------------------------------------------------------------------
