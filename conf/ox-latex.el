@@ -83,7 +83,7 @@
   "\\documentclass[conference]{IEEEtran}
    \\usepackage[caption=false,font=footnotesize]{subfig}
    \\usepackage[dvipdfmx]{graphicx}
-   \\usepackage[dvipdfmx]{hyperref}
+   \\usepackage[bookmarks=false]{hyperref}
    \\usepackage{cite}
    \\usepackage{array}
    \\usepackage{fixltx2e}
