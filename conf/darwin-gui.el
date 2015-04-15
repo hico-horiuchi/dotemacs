@@ -58,7 +58,7 @@
 (set-face-attribute 'tabbar-unselected nil ; 非アクティブなタブ
   :background "#829496" :foreground "#002b36" :box nil)
 ;; フォント
-(defvar tabbar-font "Ricty Regular for Powerline")
+(defvar tabbar-font "Ricty")
 (set-face-attribute 'tabbar-default nil :family tabbar-font :height 1.0)
 ;;--------------------------------------------------------------------------------
 
