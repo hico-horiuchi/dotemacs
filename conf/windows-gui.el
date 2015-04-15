@@ -13,9 +13,11 @@
 ;; テーマ
 ;;--------------------------------------------------------------------------------
 (custom-set-variables
- '(custom-safe-themes (quote ("7392f213ece957a89580293fb7976359b33d5afd17709a3add22e098c19552a9" default))))
+ '(custom-safe-themes (quote ("b2231b396c332cf82d255f6a882687cb3c97ac36ee4b918713883a8f148af966" default))))
 (add-to-list 'custom-theme-load-path (concat user-emacs-directory "theme/solarized"))
-(load-theme 'solarized-dark)
+(load-theme 'solarized t)
+(set-frame-parameter nil 'background-mode 'dark)
+(enable-theme 'solarized)
 ;;--------------------------------------------------------------------------------
 
 ;;--------------------------------------------------------------------------------
