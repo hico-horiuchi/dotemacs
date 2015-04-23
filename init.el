@@ -355,6 +355,7 @@
 (add-auto-mode "\\.rake$" ruby-mode)
 (add-auto-mode "Gemfile$" ruby-mode)
 (add-auto-mode "Gomfile$" ruby-mode)
+(add-auto-mode "Vagrantfile$" ruby-mode)
 (add-hook-fn 'ruby-mode-hook
   (add-to-list 'interpreter-mode-alist '("ruby" . ruby-mode))
   ;; (inf-ruby-setup-keybindings)
