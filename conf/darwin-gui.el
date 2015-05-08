@@ -54,9 +54,9 @@
 (set-face-attribute 'tabbar-default nil    ; バー自体の色
   :background "#839496" :foreground nil :box nil)
 (set-face-attribute 'tabbar-selected nil   ; アクティブなタブ
-  :background "#002b36" :foreground "#829496" :box nil :weight 'bold)
+  :background "#829496" :foreground "#002b36" :box nil :weight 'bold)
 (set-face-attribute 'tabbar-unselected nil ; 非アクティブなタブ
-  :background "#829496" :foreground "#002b36" :box nil)
+  :background "#002b36" :foreground "#829496" :box nil)
 ;; フォント
 (defvar tabbar-font "Ricty")
 (set-face-attribute 'tabbar-default nil :family tabbar-font :height 1.0)

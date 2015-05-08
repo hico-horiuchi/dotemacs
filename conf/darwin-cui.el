@@ -48,6 +48,18 @@
 ;;--------------------------------------------------------------------------------
 
 ;;--------------------------------------------------------------------------------
+;; tabbar
+;;--------------------------------------------------------------------------------
+;; 色設定
+(set-face-attribute 'tabbar-default nil    ; バー自体の色
+  :background "gray75" :foreground nil :underline nil)
+(set-face-attribute 'tabbar-selected nil   ; アクティブなタブ
+  :background "unspecified" :foreground "unspecified" :weight 'bold)
+(set-face-attribute 'tabbar-unselected nil ; 非アクティブなタブ
+  :background "gray75" :foreground "black")
+;;--------------------------------------------------------------------------------
+
+;;--------------------------------------------------------------------------------
 ;; auto-complete
 ;;--------------------------------------------------------------------------------
 (require 'auto-complete-config)

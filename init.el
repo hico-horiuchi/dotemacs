@@ -168,7 +168,9 @@
 ;; タブ上でマウスホイールを使わない
 (tabbar-mwheel-mode nil)
 ;; グループを使わない
-;; (setq tabbar-buffer-groups-function nil)
+(setq tabbar-buffer-groups-function nil)
+;; タブの間隔
+(setq tabbar-separator '(1.0))
 ;; 左側のボタンを消す
 (dolist (btn '(tabbar-buffer-home-button
                tabbar-scroll-left-button
