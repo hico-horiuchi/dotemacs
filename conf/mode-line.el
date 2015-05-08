@@ -11,8 +11,6 @@
 ;;--------------------------------------------------------------------------------
 ;; モードラインの色
 ;;--------------------------------------------------------------------------------
-(set-face-attribute 'mode-line nil
-  :foreground "black" :background "white" :box nil)
-(set-face-attribute 'mode-line-inactive nil
-  :foreground "white" :background "dim gray" :box nil)
+(set-face-attribute 'mode-line nil :box nil)
+(set-face-attribute 'mode-line-inactive nil :box nil)
 ;;--------------------------------------------------------------------------------

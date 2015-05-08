@@ -190,6 +190,8 @@
 (tabbar-mwheel-mode nil)
 ;; グループを使わない
 (setq tabbar-buffer-groups-function nil)
+;; タブの間隔
+(setq tabbar-separator '(1.0))
 ;; 左側のボタンを消す
 (dolist (btn '(tabbar-buffer-home-button
                tabbar-scroll-left-button
@@ -198,13 +200,11 @@
                  (cons "" nil))))
 ;; 色設定
 (set-face-attribute 'tabbar-default nil    ; バー自体の色
-  :background "white" :foreground nil :box nil)
+  :background "gray75" :foreground nil :underline nil)
 (set-face-attribute 'tabbar-selected nil   ; アクティブなタブ
-  :background "black" :foreground "white" :box nil :weight 'bold)
+  :background "unspecified" :foreground "unspecified" :weight 'bold)
 (set-face-attribute 'tabbar-unselected nil ; 非アクティブなタブ
-  :background "white" :foreground "black" :box nil)
-;; タブの間
-(setq tabbar-separator '(1.0))
+  :background "gray75" :foreground "black")
 ;;--------------------------------------------------------------------------------
 
 ;;--------------------------------------------------------------------------------
