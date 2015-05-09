@@ -14,3 +14,15 @@
 (set-face-attribute 'mode-line nil :box nil)
 (set-face-attribute 'mode-line-inactive nil :box nil)
 ;;--------------------------------------------------------------------------------
+
+;;--------------------------------------------------------------------------------
+;; リージョン選択時に行数と文字数をカウント
+;;--------------------------------------------------------------------------------
+(defun count-lines-and-chars ()
+  (if mark-active
+      (format " [%d lines, %d chars] ⮁"
+              (count-lines (region-beginning) (region-end))
+              (- (region-end) (region-beginning)))
+    ""))
+(add-to-list 'default-mode-line-format '(:eval (count-lines-and-chars)))
+;;--------------------------------------------------------------------------------
