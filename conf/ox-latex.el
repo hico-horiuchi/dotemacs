@@ -97,6 +97,22 @@
   ("\\paragraph{%s}" . "\\paragraph*{%s}")
   ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
+;; ipsj
+(add-to-list 'org-latex-classes '(
+  "ipsj"
+  "\\documentclass[submit,techreq,noauthor]{ipsj}
+   \\usepackage[dvipdfmx]{graphicx}
+   \\usepackage[bookmarks=false]{hyperref}
+   \\usepackage{url}
+   \\usepackage{enumerate}
+   \\hypersetup{pdfborder={0,0,0}}
+   [NO-DEFAULT-PACKAGES]"
+  ("\\section{%s}" . "\\section*{%s}")
+  ("\\subsection{%s}" . "\\subsection*{%s}")
+  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+  ("\\paragraph{%s}" . "\\paragraph*{%s}")
+  ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
 ;; beamer
 (add-to-list 'org-latex-classes '(
   "beamer"
@@ -106,3 +122,5 @@
 
 ;; デフォルトの #+LATEX_CLASS
 (setq org-latex-default-class "report")
+;; #+BIND: を許可
+(setq org-export-allow-bind-keywords t)
