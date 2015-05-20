@@ -102,10 +102,8 @@
   "ipsj"
   "\\documentclass[submit,techreq,noauthor]{ipsj}
    \\usepackage[dvipdfmx]{graphicx}
-   \\usepackage[bookmarks=false]{hyperref}
    \\usepackage{url}
    \\usepackage{enumerate}
-   \\hypersetup{pdfborder={0,0,0}}
    [NO-DEFAULT-PACKAGES]"
   ("\\section{%s}" . "\\section*{%s}")
   ("\\subsection{%s}" . "\\subsection*{%s}")
