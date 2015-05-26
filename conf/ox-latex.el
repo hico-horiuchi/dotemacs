@@ -104,6 +104,8 @@
    \\usepackage[dvipdfmx]{graphicx}
    \\usepackage{url}
    \\usepackage{enumerate}
+   \\usepackage{listings,jlisting}
+   \\usepackage{color}
    [NO-DEFAULT-PACKAGES]"
   ("\\section{%s}" . "\\section*{%s}")
   ("\\subsection{%s}" . "\\subsection*{%s}")
