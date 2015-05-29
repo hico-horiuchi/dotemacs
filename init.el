@@ -289,13 +289,12 @@
 (autoload 'magit-log            "magit")
 (autoload 'magit-reflog         "magit")
 (autoload 'magit-branch-manager "magit")
-(autoload 'magit-browse         "magit")
 (global-set-key (kbd "C-c m s") 'magit-status)         ; git status
 (global-set-key (kbd "C-c m l") 'magit-log)            ; git log
 (global-set-key (kbd "C-c m r") 'magit-reflog)         ; git reflog
 (global-set-key (kbd "C-c m b") 'magit-branch-manager) ; git branch
-(global-set-key (kbd "C-c m w") 'magit-browse)
 (add-hook-fn 'magit-mode-hook
+  (setq magit-auto-revert-mode nil)
   ;; diff用のfaceを設定する
   (diff-mode-setup-faces)
   ;; diffの表示設定が上書きされてしまうのでハイライトを無効にする
