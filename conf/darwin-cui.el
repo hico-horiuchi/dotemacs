@@ -117,6 +117,7 @@
   (setq tab-width 2)
   (setq indent-tabs-mode t)
   (setq gofmt-command "goimports")
+  (define-key go-mode-map (kbd "M-.") 'godef-jump)
   (add-hook 'before-save-hook 'gofmt-before-save)
   (let ((envs '("GOROOT" "GOPATH"))) (exec-path-from-shell-copy-envs envs)))
 ;; gocode
