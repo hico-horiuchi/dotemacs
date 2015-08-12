@@ -276,11 +276,9 @@
 ;; diffの表示方法を変更
 (defun diff-mode-setup-faces ()
   ;; 追加された行は緑で表示
-  (set-face-attribute 'diff-added nil
-    :foreground "green" :background "black")
+  (set-face-attribute 'diff-added nil :foreground "green" :background "black")
   ;; 削除された行は赤で表示
-  (set-face-attribute 'diff-removed nil
-    :foreground "red" :background "black"))
+  (set-face-attribute 'diff-removed nil :foreground "red" :background "black"))
 (add-hook-fn 'diff-mode-hook (diff-mode-setup-faces))
 ;;--------------------------------------------------------------------------------
 
