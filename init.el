@@ -264,6 +264,12 @@
 ;;--------------------------------------------------------------------------------
 
 ;;--------------------------------------------------------------------------------
+;; dash
+;;--------------------------------------------------------------------------------
+;; (require 'dash)
+;;--------------------------------------------------------------------------------
+
+;;--------------------------------------------------------------------------------
 ;; exec-path-from-shell
 ;;--------------------------------------------------------------------------------
 (autoload 'exec-path-from-shell-initialize "exec-path-from-shell")
@@ -285,22 +291,22 @@
 ;;--------------------------------------------------------------------------------
 ;; magit
 ;;--------------------------------------------------------------------------------
-(autoload 'magit-status         "magit")
-(autoload 'magit-log            "magit")
-(autoload 'magit-reflog         "magit")
-(autoload 'magit-branch-manager "magit")
-(global-set-key (kbd "C-c m s") 'magit-status)         ; git status
-(global-set-key (kbd "C-c m l") 'magit-log)            ; git log
-(global-set-key (kbd "C-c m r") 'magit-reflog)         ; git reflog
-(global-set-key (kbd "C-c m b") 'magit-branch-manager) ; git branch
-(add-hook-fn 'magit-mode-hook
-  (setq magit-auto-revert-mode nil)
-  ;; diff用のfaceを設定する
-  (diff-mode-setup-faces)
-  ;; diffの表示設定が上書きされてしまうのでハイライトを無効にする
-  (set-face-attribute 'magit-item-highlight nil :inherit nil)
-  ;; ファイル名は青で表示
-  (set-face-attribute 'magit-diff-file-header nil :foreground "dark blue"))
+;; (autoload 'magit-status         "magit")
+;; (autoload 'magit-log            "magit")
+;; (autoload 'magit-reflog         "magit")
+;; (autoload 'magit-branch-manager "magit")
+;; (global-set-key (kbd "C-c m s") 'magit-status)         ; git status
+;; (global-set-key (kbd "C-c m l") 'magit-log)            ; git log
+;; (global-set-key (kbd "C-c m r") 'magit-reflog)         ; git reflog
+;; (global-set-key (kbd "C-c m b") 'magit-branch-manager) ; git branch
+;; (add-hook-fn 'magit-mode-hook
+;;   (setq magit-auto-revert-mode nil)
+;;   ;; diff用のfaceを設定する
+;;   (diff-mode-setup-faces)
+;;   ;; diffの表示設定が上書きされてしまうのでハイライトを無効にする
+;;   (set-face-attribute 'magit-item-highlight nil :inherit nil)
+;;   ;; ファイル名は青で表示
+;;   (set-face-attribute 'magit-diff-file-header nil :foreground "dark blue"))
 ;;--------------------------------------------------------------------------------
 
 ;;--------------------------------------------------------------------------------
