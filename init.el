@@ -233,10 +233,11 @@
   (setq magit-auto-revert-mode nil)
   ;; diff用のfaceを設定する
   (diff-mode-setup-faces)
-  ;; diffの表示設定が上書きされてしまうのでハイライトを無効にする
-  (set-face-attribute 'magit-item-highlight nil :inherit nil)
-  ;; ファイル名は青で表示
-  (set-face-attribute 'magit-diff-file-header nil :foreground "dark blue"))
+  ;; ハイライトを無効
+  (remove-hook 'magit-section-highlight-hook 'magit-diff-highlight)
+  (remove-hook 'magit-section-highlight-hook 'magit-section-highlight)
+  (set-face-attribute 'magit-diff-added nil :background "unspecified-bg")
+  (set-face-attribute 'magit-diff-removed nil :background "unspecified-bg"))
 ;;--------------------------------------------------------------------------------
 
 ;;--------------------------------------------------------------------------------
