@@ -143,22 +143,6 @@
 ;;--------------------------------------------------------------------------------
 
 ;;--------------------------------------------------------------------------------
-;; vc-git
-;;--------------------------------------------------------------------------------
-;; vc-gitをオフにする
-(setq vc-handled-backends nil)
-(remove-hook 'find-file-hooks 'vc-find-file-hook)
-(remove-hook 'kill-buffer-hook 'vc-kill-buffer-hook)
-;;--------------------------------------------------------------------------------
-
-;;--------------------------------------------------------------------------------
-;; exec-path-from-shell
-;;--------------------------------------------------------------------------------
-(autoload 'exec-path-from-shell-initialize "exec-path-from-shell")
-(autoload 'exec-path-from-shell-copy-envs "exec-path-from-shell")
-;;--------------------------------------------------------------------------------
-
-;;--------------------------------------------------------------------------------
 ;; tabbar
 ;;--------------------------------------------------------------------------------
 (require 'tabbar)
@@ -188,6 +172,162 @@
 ;; 大量のUndoに耐えられるようにする
 (setq undo-limit 600000
       undo-strong-limit 900000)
+;;--------------------------------------------------------------------------------
+
+;;--------------------------------------------------------------------------------
+;; jaunte
+;;--------------------------------------------------------------------------------
+(autoload 'jaunte "jaunte")
+(global-set-key (kbd "C-c j") 'jaunte)
+(setq jaunte-hint-unit 'whitespace)
+;;--------------------------------------------------------------------------------
+
+;;--------------------------------------------------------------------------------
+;; popup-kill-ring
+;;--------------------------------------------------------------------------------
+(autoload 'popup-kill-ring "popup-kill-ring")
+(global-set-key (kbd "M-y") 'popup-kill-ring)
+(setq popup-kill-ring-popup-width 51)
+;;--------------------------------------------------------------------------------
+
+;;--------------------------------------------------------------------------------
+;; vc-git
+;;--------------------------------------------------------------------------------
+;; vc-gitをオフにする
+(setq vc-handled-backends nil)
+(remove-hook 'find-file-hooks 'vc-find-file-hook)
+(remove-hook 'kill-buffer-hook 'vc-kill-buffer-hook)
+;;--------------------------------------------------------------------------------
+
+;;--------------------------------------------------------------------------------
+;; exec-path-from-shell
+;;--------------------------------------------------------------------------------
+(autoload 'exec-path-from-shell-initialize "exec-path-from-shell")
+(autoload 'exec-path-from-shell-copy-envs "exec-path-from-shell")
+;;--------------------------------------------------------------------------------
+
+;;--------------------------------------------------------------------------------
+;; diff-mode
+;;--------------------------------------------------------------------------------
+;; diffの表示方法を変更
+(defun diff-mode-setup-faces ()
+  ;; 追加された行は緑で表示
+  (set-face-attribute 'diff-added nil :foreground "green" :background "black")
+  ;; 削除された行は赤で表示
+  (set-face-attribute 'diff-removed nil :foreground "red" :background "black"))
+(add-hook-fn 'diff-mode-hook (diff-mode-setup-faces))
+;;--------------------------------------------------------------------------------
+
+;;--------------------------------------------------------------------------------
+;; magit
+;;--------------------------------------------------------------------------------
+(autoload 'magit-status         "magit")
+(autoload 'magit-log            "magit")
+(autoload 'magit-reflog         "magit")
+(autoload 'magit-branch-manager "magit")
+(global-set-key (kbd "C-c m s") 'magit-status)         ; git status
+(global-set-key (kbd "C-c m l") 'magit-log)            ; git log
+(global-set-key (kbd "C-c m r") 'magit-reflog)         ; git reflog
+(global-set-key (kbd "C-c m b") 'magit-branch-manager) ; git branch
+(add-hook-fn 'magit-mode-hook
+  (setq magit-auto-revert-mode nil)
+  ;; diff用のfaceを設定する
+  (diff-mode-setup-faces)
+  ;; diffの表示設定が上書きされてしまうのでハイライトを無効にする
+  (set-face-attribute 'magit-item-highlight nil :inherit nil)
+  ;; ファイル名は青で表示
+  (set-face-attribute 'magit-diff-file-header nil :foreground "dark blue"))
+;;--------------------------------------------------------------------------------
+
+;;--------------------------------------------------------------------------------
+;; c-mode
+;;--------------------------------------------------------------------------------
+(global-set-key (kbd "C-c c c") 'c-mode)
+(add-hook-fn 'c-mode-common-hook
+  (c-set-style "stroustrup")     ; インデントスタイル
+  (c-toggle-auto-hungry-state t) ; DELで左側の空白を全削除
+  (setq c-basic-offset 2)        ; インデント幅: 2
+  ;; オートインデント
+  (define-key c-mode-base-map "\C-m" 'newline-and-indent))
+;;--------------------------------------------------------------------------------
+
+;;--------------------------------------------------------------------------------
+;; ruby-mode
+;;--------------------------------------------------------------------------------
+(autoload 'ruby-mode "ruby-mode")
+(autoload 'run-ruby "inf-ruby")
+(autoload 'inf-ruby-keys "inf-ruby")
+;; (autoload 'inf-ruby-setup-keybindings "inf-ruby")
+(autoload 'ruby-electric-mode "ruby-electric")
+(global-set-key (kbd "C-c r b") 'ruby-mode)
+(add-auto-mode "\\.rb$" ruby-mode)
+(add-hook-fn 'ruby-mode-hook
+  (add-to-list 'interpreter-mode-alist '("ruby" . ruby-mode))
+  ;; (inf-ruby-setup-keybindings)
+  ;; 括弧の自動挿入
+  (ruby-electric-mode)
+  ;; 改行時に自動インデント
+  (define-key ruby-mode-map "\C-m" 'ruby-reindent-then-newline-and-indent))
+;; インデント幅: 2
+(add-hook-fn 'ruby-mode-hook (setq ruby-indent-level 2))
+(setq ruby-deep-indent-paren-style nil)
+(defadvice ruby-indent-line (after unindent-closing-paren activate)
+  (let ((column (current-column))
+        indent offset)
+    (save-excursion
+      (back-to-indentation)
+      (let ((state (syntax-ppss)))
+        (setq offset (- column (current-column)))
+        (when (and (eq (char-after) ?\))
+                   (not (zerop (car state))))
+          (goto-char (cadr state))
+          (setq indent (current-indentation)))))
+    (when indent
+      (indent-line-to indent)
+      (when (> offset 0) (forward-char offset)))))
+;;--------------------------------------------------------------------------------
+
+;;--------------------------------------------------------------------------------
+;; slim-mode
+;;--------------------------------------------------------------------------------
+(autoload 'slim-mode "slim-mode")
+(add-auto-mode "\\.slim$" slim-mode)
+;;--------------------------------------------------------------------------------
+
+;;--------------------------------------------------------------------------------
+;; css-mode
+;;--------------------------------------------------------------------------------
+(setq css-indent-offset 2)
+(setq cssm-indent-function #'cssm-c-style-indenter)
+(defvar hexcolor-keywords
+  '(("#[ABCDEFabcdef0-9]\\{3,6\\}"
+     (0 (put-text-property
+         (match-beginning 0)
+         (match-end 0)
+         'face (list :background
+                     (match-string-no-properties 0)))))))
+(defun hexcolor-add-to-font-lock ()
+  (font-lock-add-keywords nil hexcolor-keywords))
+(add-hook 'css-mode-hook 'hexcolor-add-to-font-lock)
+;;--------------------------------------------------------------------------------
+
+;;--------------------------------------------------------------------------------
+;; markdown-mode
+;;--------------------------------------------------------------------------------
+(autoload 'markdown-mode "markdown-mode")
+(add-auto-mode "\\.md$" markdown-mode)
+(add-hook-fn 'markdown-mode-hook
+  (remove-hook 'before-save-hook 'delete-trailing-whitespace))
+;;--------------------------------------------------------------------------------
+
+;;--------------------------------------------------------------------------------
+;; coffee-mode
+;;--------------------------------------------------------------------------------
+(autoload 'coffee-mode "coffee-mode")
+(add-auto-mode "\\.coffee$" coffee-mode)
+(add-hook-fn 'coffee-mode-hook
+  (setq coffee-tab-width 2)
+  (define-key coffee-mode-map "\C-m" 'coffee-newline-and-indent))
 ;;--------------------------------------------------------------------------------
 
 ;;--------------------------------------------------------------------------------
@@ -236,85 +376,6 @@
 (add-hook-fn 'org-bullets-mode-hook
   (global-set-key (kbd "C-c o b e") 'org-bullets-export)
   (global-set-key (kbd "C-c o b i") 'org-bullets-import))
-;;--------------------------------------------------------------------------------
-
-;;--------------------------------------------------------------------------------
-;; ruby-mode
-;;--------------------------------------------------------------------------------
-(autoload 'ruby-mode "ruby-mode")
-(autoload 'run-ruby "inf-ruby")
-(autoload 'inf-ruby-keys "inf-ruby")
-;; (autoload 'inf-ruby-setup-keybindings "inf-ruby")
-(autoload 'ruby-electric-mode "ruby-electric")
-(global-set-key (kbd "C-c r b") 'ruby-mode)
-(add-auto-mode "\\.rb$" ruby-mode)
-(add-hook-fn 'ruby-mode-hook
-  (add-to-list 'interpreter-mode-alist '("ruby" . ruby-mode))
-  ;; (inf-ruby-setup-keybindings)
-  ;; 括弧の自動挿入
-  (ruby-electric-mode)
-  ;; 改行時に自動インデント
-  (define-key ruby-mode-map "\C-m" 'ruby-reindent-then-newline-and-indent))
-;; インデント幅: 2
-(add-hook-fn 'ruby-mode-hook (setq ruby-indent-level 2))
-(setq ruby-deep-indent-paren-style nil)
-(defadvice ruby-indent-line (after unindent-closing-paren activate)
-  (let ((column (current-column))
-        indent offset)
-    (save-excursion
-      (back-to-indentation)
-      (let ((state (syntax-ppss)))
-        (setq offset (- column (current-column)))
-        (when (and (eq (char-after) ?\))
-                   (not (zerop (car state))))
-          (goto-char (cadr state))
-          (setq indent (current-indentation)))))
-    (when indent
-      (indent-line-to indent)
-      (when (> offset 0) (forward-char offset)))))
-;;--------------------------------------------------------------------------------
-
-;;--------------------------------------------------------------------------------
-;; markdown-mode
-;;--------------------------------------------------------------------------------
-(autoload 'markdown-mode "markdown-mode")
-(add-auto-mode "\\.md$" markdown-mode)
-(add-hook-fn 'markdown-mode-hook
-  (remove-hook 'before-save-hook 'delete-trailing-whitespace))
-;;--------------------------------------------------------------------------------
-
-;;--------------------------------------------------------------------------------
-;; coffee-mode
-;;--------------------------------------------------------------------------------
-(autoload 'coffee-mode "coffee-mode")
-(add-auto-mode "\\.coffee$" coffee-mode)
-(add-hook-fn 'coffee-mode-hook
-  (setq coffee-tab-width 2)
-  (define-key coffee-mode-map "\C-m" 'coffee-newline-and-indent))
-;;--------------------------------------------------------------------------------
-
-;;--------------------------------------------------------------------------------
-;; slim-mode
-;;--------------------------------------------------------------------------------
-(autoload 'slim-mode "slim-mode")
-(add-auto-mode "\\.slim$" slim-mode)
-;;--------------------------------------------------------------------------------
-
-;;--------------------------------------------------------------------------------
-;; css-mode
-;;--------------------------------------------------------------------------------
-(setq css-indent-offset 2)
-(setq cssm-indent-function #'cssm-c-style-indenter)
-(defvar hexcolor-keywords
-  '(("#[ABCDEFabcdef0-9]\\{3,6\\}"
-     (0 (put-text-property
-         (match-beginning 0)
-         (match-end 0)
-         'face (list :background
-                     (match-string-no-properties 0)))))))
-(defun hexcolor-add-to-font-lock ()
-  (font-lock-add-keywords nil hexcolor-keywords))
-(add-hook 'css-mode-hook 'hexcolor-add-to-font-lock)
 ;;--------------------------------------------------------------------------------
 
 ;;--------------------------------------------------------------------------------
