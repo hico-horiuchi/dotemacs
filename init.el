@@ -39,7 +39,8 @@
  '(menu-bar-mode nil)              ; メニューバー非表示
  '(tool-bar-mode nil)              ; ツールバー非表示
  '(indent-tabs-mode nil)           ; タブを空白で入力
- '(comment-empty-lines t))         ; 空行もコメントアウト
+ '(comment-empty-lines t)          ; 空行もコメントアウト
+ '(blink-cursor-mode nil))         ; カーソルを点滅しない
 (set-face-foreground 'font-lock-function-name-face "brightblue")
 (set-face-foreground 'minibuffer-prompt "brightblue")
 ;;--------------------------------------------------------------------------------
