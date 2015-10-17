@@ -33,6 +33,7 @@
  '(delete-auto-save-files t)       ; 自動保存ファイルを削除
  '(inhibit-startup-screen t)       ; スタートアップ画面を非表示
  '(initial-scratch-message nil)    ; scratchメッセージを非表示
+ '(backup-inhibited t)             ; 保存時にバックアップファイルを作成しない
  '(make-backup-files nil)          ; バックアップファイルを作成しない
  '(scroll-bar-mode nil)            ; スクロールバーなし
  '(transient-mark-mode t)          ; アクティブなリージョンをハイライト
@@ -41,7 +42,9 @@
  '(indent-tabs-mode nil)           ; タブを空白で入力
  '(comment-empty-lines t)          ; 空行もコメントアウト
  '(blink-cursor-mode nil)          ; カーソルを点滅しない
- '(kill-whole-line t))             ; C-kで改行までまとめてカット
+ '(kill-whole-line t)              ; C-kで改行までまとめてカット
+ '(require-final-newline t)        ; 最終行に必ず1行追加
+ '(next-line-add-newlines nil))    ; 最終行での新規行の追加を禁止
 (set-face-foreground 'font-lock-function-name-face "brightblue")
 (set-face-foreground 'minibuffer-prompt "brightblue")
 ;;--------------------------------------------------------------------------------
