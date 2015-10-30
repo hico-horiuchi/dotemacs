@@ -484,6 +484,7 @@
 ;;--------------------------------------------------------------------------------
 (autoload 'coffee-mode "coffee-mode")
 (add-auto-mode "\\.coffee$" coffee-mode)
+(add-auto-mode "\\.cjsx$" coffee-mode)
 (add-hook-fn 'coffee-mode-hook
   (setq coffee-tab-width 2)
   (define-key coffee-mode-map "\C-m" 'coffee-newline-and-indent))
