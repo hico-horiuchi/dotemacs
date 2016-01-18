@@ -61,13 +61,16 @@
 (add-to-list 'org-latex-classes '(
   "thesis"
   "\\documentclass{risepaper}
-   \\卒論
+   \\修論
    \\usepackage{epsbox}
    \\usepackage{makeidx}
-   \\usepackage[dvipdfmx]{graphicx}
+   \\usepackage[dvips]{graphicx}
    \\usepackage[dvipdfmx]{hyperref}
    \\usepackage{pxjahyper}
    \\usepackage{enumerate}
+   \\usepackage{ascmac,here,txfonts}
+   \\usepackage{listings,jlisting}
+   \\usepackage{color}
    \\hypersetup{pdfborder={0,0,0}}
    [NO-DEFAULT-PACKAGES]"
   ("\\chapter{%s}" . "\\chapter*{%s}")
