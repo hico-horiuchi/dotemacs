@@ -151,3 +151,14 @@
 (add-hook-fn 'yaml-mode-hook
   (define-key yaml-mode-map "\C-m" 'newline-and-indent))
 ;;--------------------------------------------------------------------------------
+
+;;--------------------------------------------------------------------------------
+;; wakatime-mode
+;;--------------------------------------------------------------------------------
+(require 'wakatime-mode)
+(setq wakatime-api-key (replace-regexp-in-string "\n+$" ""
+  (shell-command-to-string "grep api_key ~/.wakatime.cfg | awk '{print $3}'")))
+(setq wakatime-cli-path (replace-regexp-in-string "\n+$" ""
+  (shell-command-to-string "which wakatime")))
+(global-wakatime-mode)
+;;--------------------------------------------------------------------------------
