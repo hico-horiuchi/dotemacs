@@ -272,21 +272,19 @@
 ;; ruby-mode
 ;;--------------------------------------------------------------------------------
 (autoload 'ruby-mode "ruby-mode")
-(autoload 'run-ruby "inf-ruby")
-(autoload 'inf-ruby-keys "inf-ruby")
-;; (autoload 'inf-ruby-setup-keybindings "inf-ruby")
 (autoload 'ruby-electric-mode "ruby-electric")
 (global-set-key (kbd "C-c r b") 'ruby-mode)
 (add-auto-mode "\\.rb$" ruby-mode)
 (add-hook-fn 'ruby-mode-hook
   (add-to-list 'interpreter-mode-alist '("ruby" . ruby-mode))
-  ;; (inf-ruby-setup-keybindings)
   ;; 括弧の自動挿入
   (ruby-electric-mode)
+  ;; RSpecのサポート
+  (rspec-mode)
+  ;; インデント幅: 2
+  (setq ruby-indent-level 2)
   ;; 改行時に自動インデント
   (define-key ruby-mode-map "\C-m" 'ruby-reindent-then-newline-and-indent))
-;; インデント幅: 2
-(add-hook-fn 'ruby-mode-hook (setq ruby-indent-level 2))
 (setq ruby-deep-indent-paren-style nil)
 (defadvice ruby-indent-line (after unindent-closing-paren activate)
   (let ((column (current-column))
@@ -302,6 +300,20 @@
     (when indent
       (indent-line-to indent)
       (when (> offset 0) (forward-char offset)))))
+;;--------------------------------------------------------------------------------
+
+;;--------------------------------------------------------------------------------
+;; rspec-mode
+;;--------------------------------------------------------------------------------
+(autoload 'rspec-mode "rspec-mode")
+;;--------------------------------------------------------------------------------
+
+;;--------------------------------------------------------------------------------
+;; flycheck
+;;--------------------------------------------------------------------------------
+(autoload 'flycheck-mode "flycheck")
+(add-hook 'ruby-mode-hook 'flycheck-mode)
+(setq flycheck-check-syntax-automatically '(idle-change mode-enabled new-line save))
 ;;--------------------------------------------------------------------------------
 
 ;;--------------------------------------------------------------------------------
