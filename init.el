@@ -221,7 +221,7 @@
   (set-face-attribute 'diff-added nil :foreground "green" :background "black")
   ;; 削除された行は赤で表示
   (set-face-attribute 'diff-removed nil :foreground "red" :background "black"))
-(add-hook-fn 'diff-mode-hook (diff-mode-setup-faces))
+(add-hook 'diff-mode-hook 'diff-mode-setup-faces)
 ;;--------------------------------------------------------------------------------
 
 ;;--------------------------------------------------------------------------------
@@ -275,17 +275,15 @@
 (autoload 'ruby-electric-mode "ruby-electric")
 (global-set-key (kbd "C-c r b") 'ruby-mode)
 (add-auto-mode "\\.rb$" ruby-mode)
+(setq ruby-deep-indent-paren-style nil)
+(add-to-list 'interpreter-mode-alist '("ruby" . ruby-mode))
 (add-hook-fn 'ruby-mode-hook
-  (add-to-list 'interpreter-mode-alist '("ruby" . ruby-mode))
   ;; 括弧の自動挿入
   (ruby-electric-mode)
-  ;; RSpecのサポート
-  (rspec-mode)
   ;; インデント幅: 2
   (setq ruby-indent-level 2)
   ;; 改行時に自動インデント
   (define-key ruby-mode-map "\C-m" 'ruby-reindent-then-newline-and-indent))
-(setq ruby-deep-indent-paren-style nil)
 (defadvice ruby-indent-line (after unindent-closing-paren activate)
   (let ((column (current-column))
         indent offset)
@@ -303,9 +301,20 @@
 ;;--------------------------------------------------------------------------------
 
 ;;--------------------------------------------------------------------------------
+;; inf-ruby
+;;--------------------------------------------------------------------------------
+(autoload 'inf-ruby-minor-mode "inf-ruby")
+(setenv "PAGER" (executable-find "cat"))
+(add-hook-fn 'ruby-mode-hook
+  (inf-ruby-minor-mode)
+  (inf-ruby-switch-setup))
+;;--------------------------------------------------------------------------------
+
+;;--------------------------------------------------------------------------------
 ;; rspec-mode
 ;;--------------------------------------------------------------------------------
 (autoload 'rspec-mode "rspec-mode")
+(add-hook 'ruby-mode-hook 'rspec-mode)
 ;;--------------------------------------------------------------------------------
 
 ;;--------------------------------------------------------------------------------
